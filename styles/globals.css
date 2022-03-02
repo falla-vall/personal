@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-image: url("https://images.unsplash.com/photo-1643364962587-d5b96302b57b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=mark-pisek-iRZBdTvinWk-unsplash.jpg&w=1920");
+  background-position: center;
+  object-fit: cover;
+}
