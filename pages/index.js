@@ -47,7 +47,7 @@ export default function Home() {
       <div className="px-12 pt-48 py-12 lg:pl-60 lg:pr-36 lg:py-24 w-full h-full">
         <div className="w-full h-full rounded-2xl bg-white group opacity-75 backdrop-blur-md backdrop-saturate-200">
           <div className="pt-48 lg:pt-12 lg:ml-48 p-12">
-            <h3 className="text-4xl text-teal-900">Hello I'm</h3>
+            <h3 className="text-4xl text-teal-900">Hello I&apos;m</h3>
             <h1 className="text-6xl py-2 text-transparent bg-clip-text bg-gradient-to-r from-sky-800 via-emerald-700 to-lime-400 font-bold">
               Fallah Andy Prakasa
             </h1>
