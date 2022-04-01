@@ -13,7 +13,11 @@ module.exports = {
         "2xl": "6rem",
       },
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["Quicksand", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };
