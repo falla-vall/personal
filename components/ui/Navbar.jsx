@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="bg-white border-gray-200 px-2 sm:px-4 py-3 rounded dark:bg-gray-800">
+    <nav className="bg-white border-gray-200 px-2 sm:px-4 py-3 dark:bg-gray-800">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
         <a href="/" className="flex items-center">
           <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
