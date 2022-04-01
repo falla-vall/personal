@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Footer from "./ui/Footer";
 import Navbar from "./ui/Navbar";
 
 export default function Layout({ children }) {
@@ -11,6 +12,7 @@ export default function Layout({ children }) {
       </Head>
       <Navbar />
       <main className="container">{children}</main>
+      <Footer />
     </>
   );
 }
