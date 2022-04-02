@@ -32,19 +32,14 @@ export default function Navbar() {
   useEffect(() => {
     if (theme === "dark") {
       rawSetTheme("dark");
-      toggleRef.current.playSegments([40, 41], true);
+      toggleRef.current.playSegments([1, 40], true);
+    } else {
+      rawSetTheme("light");
+      toggleRef.current.playSegments([41, 80], true);
     }
   }, [theme]);
   const onToggle = () => {
-    if (theme === "dark") {
-      rawSetTheme("light");
-      dispatch(setTheme("light"));
-      toggleRef.current.playSegments([41, 80], true);
-    } else {
-      rawSetTheme("dark");
-      dispatch(setTheme("dark"));
-      toggleRef.current.playSegments([1, 40], true);
-    }
+    theme === "dark" ? dispatch(setTheme("light")) : dispatch(setTheme("dark"));
   };
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-3 dark:bg-gray-800">
