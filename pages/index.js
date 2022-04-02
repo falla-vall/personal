@@ -1,11 +1,11 @@
 import { useRef } from "react";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import Typewriter from "typewriter-effect";
-import Layout from "../components/Layout";
-import Lottie from "lottie-react";
-import { ghIco, igIco, inIco, twIco } from "../assets/lottie";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import Lottie from "lottie-react";
+import Typewriter from "typewriter-effect";
+import Layout from "../providers/Layout";
+import { ghIco, igIco, inIco, twIco } from "../assets/lottie";
 
 export default function Home() {
   const router = useRouter();

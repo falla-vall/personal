@@ -1,10 +1,11 @@
 import Head from "next/head";
-import Footer from "./ui/Footer";
-import Navbar from "./ui/Navbar";
+import ReduxProvider from "./Redux";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 export default function Layout({ children }) {
   return (
-    <>
+    <ReduxProvider>
       <Head>
         <title>FLLA</title>
         <meta name="description" content="My Portfolio" />
@@ -12,6 +13,6 @@ export default function Layout({ children }) {
       <Navbar />
       <main className="container">{children}</main>
       <Footer />
-    </>
+    </ReduxProvider>
   );
 }

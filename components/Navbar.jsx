@@ -1,22 +1,54 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import Lottie from "lottie-react";
+import { setTheme } from "../redux/actions/themes";
+import { useDispatch, useSelector } from "react-redux";
+import { themeToggle } from "../assets/lottie";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const theme = useSelector((state) => state.theme);
+  const dispatch = useDispatch();
+  const toggleRef = useRef(null);
+  const rawSetTheme = (rawTheme) => {
+    const root = window.document.documentElement;
+    const isDark = rawTheme === "dark";
+
+    root.classList.remove(isDark ? "light" : "dark");
+    root.classList.add(rawTheme);
+  };
+  useEffect(() => {
+    if (theme === "dark") {
+      rawSetTheme("dark");
+      toggleRef.current.playSegments([40, 41], true);
+    }
+  }, []);
+  const onToggle = () => {
+    if (theme === "dark") {
+      rawSetTheme("light");
+      dispatch(setTheme("light"));
+      toggleRef.current.playSegments([41, 80], true);
+    } else {
+      rawSetTheme("dark");
+      dispatch(setTheme("dark"));
+      toggleRef.current.playSegments([1, 40], true);
+    }
+  };
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-3 dark:bg-gray-800">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
-        <a href="/" className="flex items-center">
-          <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+        <Link href="/">
+          <a className="flex items-center">
             <Image
               src="/logo.png"
-              width={120}
-              height={45}
+              width={90}
+              height={30}
               objectFit="contain"
               className="dark:invert"
             />
-          </span>
-        </a>
+          </a>
+        </Link>
         <button
           type="button"
           className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -50,12 +82,12 @@ export default function Navbar() {
             ></path>
           </svg>
         </button>
-        <div className={`${!isOpen && "hidden"} md:block w-full md:w-auto`}>
-          <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+        <div className={`${!isOpen && "hidden"} md:flex w-full md:w-auto`}>
+          <ul className="flex flex-col md:items-center mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
             <li>
               <a
                 href="#"
-                className="block py-2 pr-4 pl-3 text-white bg-fuchsia-700 rounded md:bg-transparent md:text-fuchsia-700 md:p-0 dark:text-white"
+                className="block py-2 pr-4 pl-3 text-white bg-fuchsia-700 rounded md:bg-transparent md:text-fuchsia-700 md:dark:text-fuchsia-300 md:p-0 dark:text-white"
                 aria-current="page"
               >
                 Home
@@ -84,6 +116,16 @@ export default function Navbar() {
               >
                 Contact
               </a>
+            </li>
+            <li>
+              <Lottie
+                lottieRef={toggleRef}
+                animationData={themeToggle}
+                loop={false}
+                autoplay={false}
+                onClick={() => onToggle()}
+                className="h-12 cursor-pointer"
+              />
             </li>
           </ul>
         </div>
