@@ -21,7 +21,7 @@ export default function Home() {
   };
   return (
     <Layout>
-      <div className="flex flex-col-reverse gap-12 md:flex-row items-center py-5 md:py-10 lg:py-20">
+      <div className="mt-12 md:mt-0 flex flex-col-reverse gap-12 md:flex-row items-center py-5 md:py-10 lg:py-20">
         <div className="basis-3/5 md:pr-12">
           <h6 className="text-md md:text-xl text-center md:text-left dark:text-white mb-2 md:mb-10">
             Hello, I&lsquo;m{" "}
@@ -104,14 +104,17 @@ export default function Home() {
           </div>
         </div>
         <div className="basis-2/5 flex justify-end items-center">
-          <Image
-            src="/profile.jpg"
-            width={400}
-            height={400}
-            objectFit="cover"
-            alt="profile"
-            className="rounded-full"
-          />
+          <div className="w-64 md:w-[78%]">
+            <Image
+              src="/profile.jpg"
+              width={400}
+              height={400}
+              layout="responsive"
+              objectFit="cover"
+              alt="profile"
+              className="rounded-full"
+            />
+          </div>
         </div>
       </div>
     </Layout>
