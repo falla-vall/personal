@@ -15,6 +15,7 @@ export default function Home() {
   const twRef = useRef(null);
 
   const handleSocialClick = (url, ref) => {
+    ref.current.setSpeed(3);
     ref.current.goToAndPlay(1, true);
     router.push(url);
   };
