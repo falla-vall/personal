@@ -24,7 +24,7 @@ export default function Home() {
       <div className="flex flex-col-reverse gap-12 md:flex-row items-center py-5 md:py-10 lg:py-20">
         <div className="basis-3/5 md:pr-12">
           <h6 className="text-md md:text-xl text-center md:text-left dark:text-white mb-2 md:mb-10">
-            Hello, I'm{" "}
+            Hello, I&lsquo;m{" "}
             <span className="text-violet-600 dark:text-violet-300">
               Fallah Andy Prakasa
             </span>
@@ -109,6 +109,7 @@ export default function Home() {
             width={400}
             height={400}
             objectFit="cover"
+            alt="profile"
             className="rounded-full"
           />
         </div>

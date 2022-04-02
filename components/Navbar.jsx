@@ -34,7 +34,7 @@ export default function Navbar() {
       rawSetTheme("dark");
       toggleRef.current.playSegments([40, 41], true);
     }
-  }, []);
+  }, [theme]);
   const onToggle = () => {
     if (theme === "dark") {
       rawSetTheme("light");
@@ -56,6 +56,7 @@ export default function Navbar() {
               width={90}
               height={30}
               objectFit="contain"
+              alt="logo"
               className="dark:invert"
             />
           </a>
