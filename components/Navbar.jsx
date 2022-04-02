@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Lottie from "lottie-react";
+import toast from "react-hot-toast";
 import { setTheme } from "../redux/actions/themes";
 import { useDispatch, useSelector } from "react-redux";
 import { themeToggle } from "../assets/lottie";
@@ -11,6 +12,16 @@ export default function Navbar() {
   const theme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
   const toggleRef = useRef(null);
+  const NavTabs = () => {
+    toast("Will be available soon!", {
+      icon: "🤗",
+      style: {
+        borderRadius: "10px",
+        background: theme === "dark" ? "#1a1a1a" : "#fff",
+        color: theme === "dark" ? "#fff" : "#000",
+      },
+    });
+  };
   const rawSetTheme = (rawTheme) => {
     const root = window.document.documentElement;
     const isDark = rawTheme === "dark";
@@ -85,37 +96,44 @@ export default function Navbar() {
         <div className={`${!isOpen && "hidden"} md:flex w-full md:w-auto`}>
           <ul className="flex flex-col md:items-center mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
             <li>
-              <a
-                href="#"
-                className="block py-2 pr-4 pl-3 text-white bg-fuchsia-700 rounded md:bg-transparent md:text-fuchsia-700 md:dark:text-fuchsia-300 md:p-0 dark:text-white"
-                aria-current="page"
-              >
-                Home
-              </a>
+              <Link href="/">
+                <a
+                  className="block py-2 pr-4 pl-3 text-white bg-fuchsia-700 rounded md:bg-transparent md:text-fuchsia-700 md:dark:text-fuchsia-300 md:p-0 dark:text-white"
+                  aria-current="page"
+                >
+                  Home
+                </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
-                className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-fuchsia-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                About
-              </a>
+              <Link href="/">
+                <a
+                  onClick={() => NavTabs()}
+                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-fuchsia-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  About
+                </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
-                className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-fuchsia-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                Project
-              </a>
+              <Link href="/">
+                <a
+                  onClick={() => NavTabs()}
+                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-fuchsia-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  Project
+                </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
-                className="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-fuchsia-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-              >
-                Contact
-              </a>
+              <Link href="/">
+                <a
+                  onClick={() => NavTabs()}
+                  className="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-fuchsia-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                >
+                  Contact
+                </a>
+              </Link>
             </li>
             <li>
               <Lottie
