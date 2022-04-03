@@ -111,6 +111,7 @@ export default function Home() {
               height={400}
               layout="responsive"
               objectFit="cover"
+              priority={true}
               alt="profile"
               className="rounded-full"
             />
