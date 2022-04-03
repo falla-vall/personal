@@ -97,7 +97,7 @@ export default function Home() {
           </div>
           <div className="flex justify-center md:justify-start">
             <Link href="https://kontena.vercel.app/CV.pdf/1iC6dOlIxiyS3xbTKi0OfYKaSU2pmZXsI/view">
-              <a className="text-white bg-gradient-to-br from-violet-500 to-fuchsia-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-violet-200 dark:focus:ring-violet-800 font-medium rounded text-sm px-5 py-2.5 text-center">
+              <a className="text-white dark:text-purple-900 bg-gradient-to-br from-violet-500 to-fuchsia-400 dark:from-violet-400 dark:to-fuchsia-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-violet-200 dark:focus:ring-violet-800 font-bold rounded text-sm px-5 py-2.5 text-center">
                 Resume
               </a>
             </Link>
