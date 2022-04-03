@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import Lottie from "lottie-react";
 import toast from "react-hot-toast";
 import { setTheme } from "../redux/actions/themes";
@@ -8,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { themeToggle } from "../assets/lottie";
 
 export default function Navbar() {
+  const router = useRouter();
+  const { pathname } = router;
   const [isOpen, setIsOpen] = useState(false);
   const theme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
@@ -29,7 +32,7 @@ export default function Navbar() {
     root.classList.remove(isDark ? "light" : "dark");
     root.classList.add(rawTheme);
   };
-  useEffect(() => {
+  const switchTheme = useCallback(() => {
     if (theme === "dark") {
       rawSetTheme("dark");
       toggleRef.current.playSegments([1, 40], true);
@@ -38,9 +41,16 @@ export default function Navbar() {
       toggleRef.current.playSegments([41, 80], true);
     }
   }, [theme]);
+  useEffect(() => {
+    switchTheme();
+  }, [switchTheme]);
   const onToggle = () => {
     theme === "dark" ? dispatch(setTheme("light")) : dispatch(setTheme("dark"));
   };
+  const activeTab =
+    "block py-2 pr-4 pl-3 text-white bg-fuchsia-700 rounded md:bg-transparent md:text-fuchsia-700 md:dark:text-fuchsia-300 md:p-0 dark:text-white";
+  const inactiveTab =
+    "block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-fuchsia-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700";
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-3 dark:bg-gray-800">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
@@ -94,7 +104,7 @@ export default function Navbar() {
             <li>
               <Link href="/">
                 <a
-                  className="block py-2 pr-4 pl-3 text-white bg-fuchsia-700 rounded md:bg-transparent md:text-fuchsia-700 md:dark:text-fuchsia-300 md:p-0 dark:text-white"
+                  className={pathname === "/" ? activeTab : inactiveTab}
                   aria-current="page"
                 >
                   Home
@@ -102,12 +112,13 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-              <Link href="/">
+              <Link href="/dashboard">
                 <a
-                  onClick={() => NavTabs()}
-                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-fuchsia-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  className={
+                    pathname === "/dashboard" ? activeTab : inactiveTab
+                  }
                 >
-                  About
+                  Dashboard
                 </a>
               </Link>
             </li>
@@ -115,7 +126,7 @@ export default function Navbar() {
               <Link href="/">
                 <a
                   onClick={() => NavTabs()}
-                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-fuchsia-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  className={pathname === "/project" ? activeTab : inactiveTab}
                 >
                   Project
                 </a>
@@ -125,7 +136,7 @@ export default function Navbar() {
               <Link href="/">
                 <a
                   onClick={() => NavTabs()}
-                  className="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-fuchsia-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  className={pathname === "/contact" ? activeTab : inactiveTab}
                 >
                   Contact
                 </a>
@@ -138,7 +149,7 @@ export default function Navbar() {
                 loop={false}
                 autoplay={false}
                 onClick={() => onToggle()}
-                className="h-12 cursor-pointer"
+                className="h-12 cursor-pointer hover:brightness-150 dark:hover:brightness-50"
               />
             </li>
           </ul>
