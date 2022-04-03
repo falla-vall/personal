@@ -14,7 +14,7 @@ export default function Home() {
   const inRef = useRef(null);
   const twRef = useRef(null);
 
-  const handleSocialClick = (url, ref) => {
+  const handleSocialClick = (url: string, ref: any) => {
     ref.current.setSpeed(3);
     ref.current.goToAndPlay(1, true);
     router.push(url);

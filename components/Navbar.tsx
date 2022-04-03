@@ -8,13 +8,17 @@ import { setTheme } from "../redux/actions/themes";
 import { useDispatch, useSelector } from "react-redux";
 import { themeToggle } from "../assets/lottie";
 
+interface STATE {
+  theme: string;
+}
+
 export default function Navbar() {
   const router = useRouter();
   const { pathname } = router;
   const [isOpen, setIsOpen] = useState(false);
-  const theme = useSelector((state) => state.theme);
+  const theme = useSelector((state: STATE) => state.theme);
   const dispatch = useDispatch();
-  const toggleRef = useRef(null);
+  const toggleRef: any = useRef(null);
   const NavTabs = () => {
     toast("Will be available soon!", {
       icon: "🤗",
@@ -25,7 +29,7 @@ export default function Navbar() {
       },
     });
   };
-  const rawSetTheme = (rawTheme) => {
+  const rawSetTheme = (rawTheme: string) => {
     const root = window.document.documentElement;
     const isDark = rawTheme === "dark";
 

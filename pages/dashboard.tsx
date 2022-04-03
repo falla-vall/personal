@@ -1,8 +1,48 @@
+import { GetServerSideProps } from "next";
 import absoluteUrl from "next-absolute-url";
 import moment from "moment";
 import Layout from "../providers/Layout";
 
-export default function dashboard({ waka, Gh, GhStats }) {
+interface PROPS {
+  waka: {
+    data: {
+      human_readable_total: string;
+      best_day: {
+        date: string;
+        text: string;
+      };
+      human_readable_daily_average: string;
+      editors: Array<{
+        name: string;
+      }>;
+      languages: Array<{
+        name: string;
+      }>;
+      machines: Array<{
+        name: string;
+      }>;
+    };
+  };
+  Gh: {
+    public_repos: string;
+    followers: number;
+    following: number;
+  };
+  GhStats: {
+    currentStreak: {
+      days: number;
+    };
+    longestStreak: {
+      days: number;
+    };
+    summary: {
+      total: number;
+    };
+  };
+}
+
+export default function dashboard(props: PROPS) {
+  const { waka, Gh, GhStats } = props;
   return (
     <Layout>
       <div className="my-8 container">
@@ -168,7 +208,7 @@ export default function dashboard({ waka, Gh, GhStats }) {
   );
 }
 
-export async function getServerSideProps({ req }) {
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const { origin } = absoluteUrl(req);
   const resWaka = await fetch(origin + "/api/wakatime/stats");
   const waka = await resWaka.json();
@@ -179,4 +219,4 @@ export async function getServerSideProps({ req }) {
   return {
     props: { waka, Gh, GhStats },
   };
-}
+};

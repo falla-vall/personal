@@ -4,7 +4,8 @@ import { Toaster } from "react-hot-toast";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
-export default function Layout({ children }) {
+export default function Layout(props: any) {
+  const { children } = props;
   return (
     <ReduxProvider>
       <Head>

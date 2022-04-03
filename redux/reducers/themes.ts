@@ -1,5 +1,10 @@
 import { SET_THEME } from "../constants";
 
+interface ACTION {
+  type: string;
+  data: string;
+}
+
 const getInitialTheme = () => {
   if (typeof window !== "undefined" && window.localStorage) {
     const storedPrefs = window.localStorage.getItem("theme");
@@ -15,7 +20,7 @@ const getInitialTheme = () => {
   return "light";
 };
 
-const reducer = (state = getInitialTheme(), action) => {
+const reducer = (state = getInitialTheme(), action: ACTION) => {
   switch (action.type) {
     case SET_THEME:
       if (typeof window !== "undefined" && window.localStorage) {
@@ -24,7 +29,6 @@ const reducer = (state = getInitialTheme(), action) => {
       return action.data;
     default:
       return state;
-      c;
   }
 };
 
