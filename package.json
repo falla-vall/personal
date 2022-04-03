@@ -9,8 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nick22985/wakatime-api": "^1.0.1",
+    "github-contribution-stats": "^0.3.0",
     "lottie-react": "^2.2.1",
+    "moment": "^2.29.1",
     "next": "12.1.4",
+    "nextjs-progressbar": "^0.0.14",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-hot-toast": "^2.2.0",
