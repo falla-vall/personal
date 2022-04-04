@@ -4,10 +4,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Lottie from "lottie-react";
 import toast from "react-hot-toast";
+import { GoogleLogin } from "react-google-login";
 import { setTheme } from "../redux/actions/themes";
 import { useDispatch, useSelector } from "react-redux";
 import { themeToggle } from "../assets/lottie";
-
 interface STATE {
   theme: string;
 }
@@ -55,6 +55,12 @@ export default function Navbar() {
     "block py-2 pr-4 pl-3 text-white bg-fuchsia-700 rounded md:bg-transparent md:text-fuchsia-700 md:dark:text-fuchsia-300 md:p-0 dark:text-white";
   const inactiveTab =
     "block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-fuchsia-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700";
+  const onSuccess = (response: any) => {
+    console.log(response);
+  };
+  const onFailure = (response: any) => {
+    console.log(response);
+  };
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-3 dark:bg-gray-800">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
@@ -67,6 +73,22 @@ export default function Navbar() {
               objectFit="contain"
               alt="logo"
               className="dark:invert"
+            />
+            <GoogleLogin
+              clientId={process.env.GOOGLE_CLIENT_ID}
+              render={(renderProps: any) => (
+                <button
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                  className="text-white dark:text-gray-800 hover:text-gray-800 dark:hover:text-white"
+                >
+                  Google
+                </button>
+              )}
+              onSuccess={onSuccess}
+              onFailure={onFailure}
+              cookiePolicy={"single_host_origin"}
+              isSignedIn={true}
             />
           </a>
         </Link>
