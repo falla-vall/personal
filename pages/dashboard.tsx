@@ -1,7 +1,6 @@
 import { GetServerSideProps } from "next";
 import absoluteUrl from "next-absolute-url";
 import moment from "moment";
-import Layout from "../providers/Layout";
 
 interface PROPS {
   waka: {
@@ -44,7 +43,7 @@ interface PROPS {
 export default function dashboard(props: PROPS) {
   const { waka, Gh, GhStats } = props;
   return (
-    <Layout>
+    <>
       <div className="my-8 container">
         <h1 className="text-4xl md:text-6xl dark:text-gray-200 font-thin my-2">
           Dashboard
@@ -204,7 +203,7 @@ export default function dashboard(props: PROPS) {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 }
 

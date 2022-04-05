@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Lottie from "lottie-react";
 import Typewriter from "typewriter-effect";
-import Layout from "../providers/Layout";
 import { ghIco, igIco, inIco, twIco } from "../assets/lottie";
 
 export default function Home() {
@@ -20,7 +19,7 @@ export default function Home() {
     router.push(url);
   };
   return (
-    <Layout>
+    <>
       <div className="mt-12 md:mt-0 flex flex-col-reverse gap-12 md:flex-row items-center py-5 md:py-10 lg:py-20">
         <div className="basis-3/5 md:pr-12">
           <h6 className="text-md md:text-xl text-center md:text-left dark:text-white mb-2 md:mb-10">
@@ -118,6 +117,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 }
