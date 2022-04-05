@@ -1,3 +1,6 @@
 const SET_THEME = "TOGGLE_THEME";
 
-export { SET_THEME };
+const LOGIN = "LOGIN";
+const LOGOUT = "LOGOUT";
+
+export { SET_THEME, LOGIN, LOGOUT };

@@ -12,7 +12,9 @@
   "dependencies": {
     "@nick22985/wakatime-api": "^1.0.1",
     "@prisma/client": "^3.11.1",
+    "axios": "^0.26.1",
     "github-contribution-stats": "^0.3.0",
+    "google-auth-library": "^7.14.1",
     "lottie-react": "^2.2.1",
     "moment": "^2.29.1",
     "next": "12.1.4",

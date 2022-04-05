@@ -4,19 +4,30 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Lottie from "lottie-react";
 import toast from "react-hot-toast";
-import { GoogleLogin } from "react-google-login";
+import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { setTheme } from "../redux/actions/themes";
+import { API, setAuthToken } from "../utils/api";
+import { login, logout } from "../redux/actions/user";
 import { useDispatch, useSelector } from "react-redux";
 import { themeToggle } from "../assets/lottie";
 interface STATE {
   theme: string;
+  userData: {
+    token: string;
+    user: {
+      id: string;
+      name: string;
+      email: string;
+      picture: string;
+    };
+  };
 }
 
 export default function Navbar() {
   const router = useRouter();
   const { pathname } = router;
   const [isOpen, setIsOpen] = useState(false);
-  const theme = useSelector((state: STATE) => state.theme);
+  const { theme, userData } = useSelector((state: STATE) => state);
   const dispatch = useDispatch();
   const toggleRef: any = useRef(null);
   const NavTabs = () => {
@@ -32,7 +43,6 @@ export default function Navbar() {
   const rawSetTheme = (rawTheme: string) => {
     const root = window.document.documentElement;
     const isDark = rawTheme === "dark";
-
     root.classList.remove(isDark ? "light" : "dark");
     root.classList.add(rawTheme);
   };
@@ -56,24 +66,65 @@ export default function Navbar() {
   const inactiveTab =
     "block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-fuchsia-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700";
   const onSuccess = (response: any) => {
-    console.log(response);
+    const { tokenId } = response;
+    setAuthToken(tokenId);
+    API.get("/auth").then((res) => {
+      API.get("/user").then((resp: any) => {
+        if (resp.data[0].google_id === res.data.id) {
+          dispatch(login(tokenId, res.data));
+        }
+      });
+    });
   };
   const onFailure = (response: any) => {
     console.log(response);
   };
+  const onLogoutSuccess = () => {
+    dispatch(logout());
+    toast.success("You have been logged out");
+  };
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-3 dark:bg-gray-800">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
-        <Link href="/">
-          <a className="flex items-center">
-            <Image
-              src="/logo.png"
-              width={90}
-              height={30}
-              objectFit="contain"
-              alt="logo"
-              className="dark:invert"
-            />
+        <div className="flex items-center gap-4">
+          <Link href="/">
+            <a>
+              <Image
+                src="/logo.png"
+                width={90}
+                height={30}
+                objectFit="contain"
+                alt="logo"
+                className="dark:invert"
+              />
+            </a>
+          </Link>
+          {userData.user ? (
+            <div className="flex items-center gap-2">
+              <Image
+                src={userData.user.picture}
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+              <h6 className="text-sm text-gray-700 dark:text-gray-300">
+                {userData.user.name}
+              </h6>
+              <GoogleLogout
+                clientId={process.env.GOOGLE_CLIENT_ID}
+                render={(renderProps: any) => (
+                  <button
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                    className="bg-red-700 dark:bg-red-300 hover:bg-red-500 dark:hover:bg-red-500 rounded px-2 py-1 text-white dark:text-gray-900"
+                  >
+                    Logout
+                  </button>
+                )}
+                onLogoutSuccess={onLogoutSuccess}
+              />
+            </div>
+          ) : (
             <GoogleLogin
               clientId={process.env.GOOGLE_CLIENT_ID}
               render={(renderProps: any) => (
@@ -90,8 +141,8 @@ export default function Navbar() {
               cookiePolicy={"single_host_origin"}
               isSignedIn={true}
             />
-          </a>
-        </Link>
+          )}
+        </div>
         <button
           type="button"
           className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
