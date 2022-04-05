@@ -113,6 +113,7 @@ export default function Navbar() {
                 src={userData.user.picture}
                 width={40}
                 height={40}
+                alt="picture"
                 className="rounded-full"
               />
               <h6 className="text-sm text-gray-700 dark:text-gray-300">
