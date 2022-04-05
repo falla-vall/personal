@@ -94,7 +94,7 @@ export default function Navbar() {
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-3 dark:bg-gray-800">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center md:gap-4">
           <Link href="/">
             <a>
               <Image
@@ -108,7 +108,7 @@ export default function Navbar() {
             </a>
           </Link>
           {userData.user ? (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center md:gap-2">
               <Image
                 src={userData.user.picture}
                 width={40}
@@ -116,7 +116,7 @@ export default function Navbar() {
                 alt="picture"
                 className="rounded-full"
               />
-              <h6 className="text-sm text-gray-700 dark:text-gray-300">
+              <h6 className="hidden md:block text-sm text-gray-700 dark:text-gray-300">
                 {userData.user.name}
               </h6>
               <GoogleLogout
