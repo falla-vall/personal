@@ -72,6 +72,14 @@ export default function Navbar() {
       API.get("/user").then((resp: any) => {
         if (resp.data[0].google_id === res.data.id) {
           dispatch(login(tokenId, res.data));
+          toast(`Welcome Back!, ${res.data.name.split(" ")[0]}`, {
+            icon: "👋",
+            style: {
+              borderRadius: "10px",
+              background: theme === "dark" ? "#1a1a1a" : "#fff",
+              color: theme === "dark" ? "#fff" : "#000",
+            },
+          });
         }
       });
     });
