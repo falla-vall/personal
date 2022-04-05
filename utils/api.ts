@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const API = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "https://flla.my.id/api",
 });
 
 export const setAuthToken = (token: string) => {
