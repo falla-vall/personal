@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { useSelector } from "react-redux";
-import absoluteUrl from "next-absolute-url";
 import toast from "react-hot-toast";
 import { API } from "./../utils/api";
 
@@ -28,9 +27,8 @@ interface STATE {
   };
 }
 
-export default function Project({ data }: any) {
+export default function Project({ projects }: any) {
   const { userData } = useSelector((state: STATE) => state);
-  const [projects, setProjects] = useState(data);
   const [form, setForm] = useState({
     name: "",
     desc: "",
@@ -57,7 +55,6 @@ export default function Project({ data }: any) {
     });
     if (res.status === 201) {
       toast.success("Project added successfully!");
-      setProjects([...projects, form]);
       setForm({
         name: "",
         desc: "",
@@ -184,13 +181,13 @@ export default function Project({ data }: any) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const { origin } = absoluteUrl(req);
-  const res = await fetch(`${origin}/api/projects`);
-  const data = await res.json();
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await fetch(`${process.env.PUBLIC_URL}/api/projects`);
+  const projects = await res.json();
   return {
     props: {
-      data,
+      projects,
     },
+    revalidate: 3600,
   };
 };
