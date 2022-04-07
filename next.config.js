@@ -6,7 +6,11 @@ const nextConfig = {
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   },
   images: {
-    domains: ["localhost:3000", "lh3.googleusercontent.com"],
+    domains: [
+      "localhost:3000",
+      "lh3.googleusercontent.com",
+      "kontena.vercel.app",
+    ],
   },
 };
 

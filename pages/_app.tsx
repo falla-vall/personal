@@ -6,7 +6,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Layout>
       <Component {...pageProps} />
-      );
     </Layout>
   );
 }

@@ -10,6 +10,7 @@ import { API, setAuthToken } from "../utils/api";
 import { login, logout } from "../redux/actions/user";
 import { useDispatch, useSelector } from "react-redux";
 import { themeToggle } from "../assets/lottie";
+
 interface STATE {
   theme: string;
   userData: {
@@ -209,9 +210,8 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-              <Link href="/">
+              <Link href="/project">
                 <a
-                  onClick={() => NavTabs()}
                   className={pathname === "/project" ? activeTab : inactiveTab}
                 >
                   Project
