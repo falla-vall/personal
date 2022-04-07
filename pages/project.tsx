@@ -49,7 +49,6 @@ export default function Project({ data }: any) {
   // handle form submit
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(form);
     const res = await API.post("/projects", {
       name,
       desc,

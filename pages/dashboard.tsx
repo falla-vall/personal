@@ -1,6 +1,4 @@
-import { GetServerSideProps } from "next";
-import absoluteUrl from "next-absolute-url";
-import moment from "moment";
+import { GetStaticProps } from "next";
 
 interface PROPS {
   waka: {
@@ -22,26 +20,27 @@ interface PROPS {
       }>;
     };
   };
-  Gh: {
-    public_repos: string;
-    followers: number;
-    following: number;
-  };
-  GhStats: {
-    currentStreak: {
-      days: number;
-    };
-    longestStreak: {
-      days: number;
-    };
-    summary: {
-      total: number;
+  gh: {
+    viewer: {
+      followers: {
+        totalCount: number;
+      };
+      following: {
+        totalCount: number;
+      };
+      repositories: {
+        totalCount: number;
+      };
+      contributionsCollection: {
+        totalCommitContributions: number;
+        totalRepositoryContributions: number;
+        totalPullRequestContributions: number;
+      };
     };
   };
 }
 
-export default function dashboard(props: PROPS) {
-  const { waka, Gh, GhStats } = props;
+export default function dashboard({ waka, gh }: PROPS) {
   return (
     <>
       <div className="my-8 container">
@@ -59,7 +58,7 @@ export default function dashboard(props: PROPS) {
                 Wakatime
               </h3>
               <span className="text-sm md:text-md text-gray-600 dark:text-gray-400">
-                Last 7 Days
+                Last Year
               </span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -75,16 +74,9 @@ export default function dashboard(props: PROPS) {
               </div>
               <div className="border-2 border-gray-300 dark:border-gray-700 rounded p-4">
                 <div className="flex flex-col">
-                  <div className="flex items-center gap-2">
-                    <h4 className="text-lg md:text-xl dark:text-gray-300">
-                      Best Day
-                    </h4>
-                    <span className="text-xs md:text-sm font-bold text-gray-600 dark:text-gray-400">
-                      {moment(waka.data.best_day.date, "YYYY-MM-DD").format(
-                        "dddd"
-                      )}
-                    </span>
-                  </div>
+                  <h4 className="text-lg md:text-xl dark:text-gray-300">
+                    Best Day
+                  </h4>
                   <h3 className="text-xl md:text-2xl font-black dark:text-gray-200">
                     {waka.data.best_day.text}
                   </h3>
@@ -142,10 +134,10 @@ export default function dashboard(props: PROPS) {
               <div className="border-2 border-gray-300 dark:border-gray-700 rounded p-4">
                 <div className="flex flex-col">
                   <h4 className="text-lg md:text-xl dark:text-gray-300">
-                    Public Repos
+                    Total Repos
                   </h4>
                   <h3 className="text-xl md:text-2xl font-black dark:text-gray-200">
-                    {Gh.public_repos}
+                    {gh.viewer.repositories.totalCount}
                   </h3>
                 </div>
               </div>
@@ -155,7 +147,7 @@ export default function dashboard(props: PROPS) {
                     Followers
                   </h4>
                   <h3 className="text-xl md:text-2xl font-black dark:text-gray-200">
-                    {Gh.followers}
+                    {gh.viewer.followers.totalCount}
                   </h3>
                 </div>
               </div>
@@ -165,37 +157,43 @@ export default function dashboard(props: PROPS) {
                     Following
                   </h4>
                   <h3 className="text-xl md:text-2xl font-black dark:text-gray-200">
-                    {Gh.following}
+                    {gh.viewer.following.totalCount}
                   </h3>
                 </div>
               </div>
               <div className="border-2 border-gray-300 dark:border-gray-700 rounded p-4">
                 <div className="flex flex-col">
                   <h4 className="text-lg md:text-xl dark:text-gray-300">
-                    Current Streak
+                    Total Commit Contributions
                   </h4>
                   <h3 className="text-xl md:text-2xl font-black dark:text-gray-200">
-                    {GhStats.currentStreak.days} days
+                    {gh.viewer.contributionsCollection.totalCommitContributions}
                   </h3>
                 </div>
               </div>
               <div className="border-2 border-gray-300 dark:border-gray-700 rounded p-4">
                 <div className="flex flex-col">
                   <h4 className="text-lg md:text-xl dark:text-gray-300">
-                    Longest Streak
+                    Total Repo Contributions
                   </h4>
                   <h3 className="text-xl md:text-2xl font-black dark:text-gray-200">
-                    {GhStats.longestStreak.days} days
+                    {
+                      gh.viewer.contributionsCollection
+                        .totalRepositoryContributions
+                    }
                   </h3>
                 </div>
               </div>
               <div className="border-2 border-gray-300 dark:border-gray-700 rounded p-4">
                 <div className="flex flex-col">
                   <h4 className="text-lg md:text-xl dark:text-gray-300">
-                    Total Contributions
+                    Total Pull Request Contributions
                   </h4>
                   <h3 className="text-xl md:text-2xl font-black dark:text-gray-200">
-                    {GhStats.summary.total}
+                    {
+                      gh.viewer.contributionsCollection
+                        .totalPullRequestContributions
+                    }
                   </h3>
                 </div>
               </div>
@@ -207,15 +205,15 @@ export default function dashboard(props: PROPS) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const { origin } = absoluteUrl(req);
-  const resWaka = await fetch(origin + "/api/wakatime/stats");
+export const getStaticProps: GetStaticProps = async () => {
+  const resWaka = await fetch(
+    `https://wakatime.com/api/v1/users/AkaruiAikara/stats/last_year?api_key=${process.env.WAKATIME_API}`
+  );
   const waka = await resWaka.json();
-  const resGh = await fetch("https://api.github.com/users/AkaruiAikara");
-  const Gh = await resGh.json();
-  const resGhStats = await fetch(origin + "/api/github/stats");
-  const GhStats = await resGhStats.json();
+  const resGh = await fetch(process.env.PUBLIC_URL + "/api/github/stats");
+  const gh = await resGh.json();
   return {
-    props: { waka, Gh, GhStats },
+    props: { waka, gh },
+    revalidate: 43200,
   };
 };

@@ -2,7 +2,6 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       NODE_ENV: "development" | "production";
-      WAKATIME_API: string;
     }
   }
 }
@@ -10,6 +9,9 @@ namespace NodeJS {
   interface ProcessEnv {
     NODE_ENV: "development" | "production";
     GOOGLE_CLIENT_ID: string;
+    PUBLIC_URL: string;
+    GITHUB_TOKEN: string;
+    WAKATIME_API: string;
   }
 }
 
