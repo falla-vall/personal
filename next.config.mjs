@@ -1,4 +1,5 @@
 import { env } from "./src/env/server.mjs";
+import WindiCSSWebpackPlugin from "windicss-webpack-plugin";
 
 /**
  * Don't be scared of the generics here.
@@ -19,5 +20,9 @@ export default defineNextConfig({
   i18n: {
     locales: ["en"],
     defaultLocale: "en",
+  },
+  webpack(config) {
+    config.plugins.push(new WindiCSSWebpackPlugin());
+    return config;
   },
 });

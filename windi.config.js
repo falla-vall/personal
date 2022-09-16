@@ -1,0 +1,9 @@
+/** @type {import('windicss').Config} */
+import { defineConfig } from "windicss/helpers";
+
+module.exports = defineConfig({
+  extract: {
+    include: ["**/*.{jsx,tsx,css}"],
+    exclude: ["node_modules", ".git", ".next"],
+  },
+});
