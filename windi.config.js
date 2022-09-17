@@ -6,4 +6,12 @@ module.exports = defineConfig({
     include: ["**/*.{jsx,tsx,css}"],
     exclude: ["node_modules", ".git", ".next"],
   },
+  theme: {
+    extend: {
+      fontFamily: {
+        quicksand: ["Quicksand", "sans-serif"],
+        fira: ["Fira Code", "monospace"],
+      },
+    },
+  },
 });
