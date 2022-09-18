@@ -1,9 +1,9 @@
 import {
   HiOutlineHome,
-  HiOutlineLightBulb,
+  HiOutlineUser,
   HiOutlineServer,
   HiOutlineDocumentText,
-  HiOutlineUser,
+  HiOutlinePhone,
 } from "react-icons/hi";
 const data = [
   {
@@ -12,24 +12,28 @@ const data = [
     icon: HiOutlineHome,
   },
   {
-    name: "Skills",
-    path: "/skills",
-    icon: HiOutlineLightBulb,
+    name: "About",
+    path: "/about",
+    icon: HiOutlineUser,
+    isSoon: true,
   },
   {
     name: "Projects",
     path: "/projects",
     icon: HiOutlineServer,
+    isSoon: true,
   },
   {
     name: "Resume",
     path: "/resume",
     icon: HiOutlineDocumentText,
+    isSoon: true,
   },
   {
     name: "Contact",
     path: "/contact",
-    icon: HiOutlineUser,
+    icon: HiOutlinePhone,
+    isSoon: true,
   },
 ];
 
