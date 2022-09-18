@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
-import Layout from "../components/Layout";
 import { trpc } from "../utils/trpc";
 import { useResponsive } from "../hooks";
 import { colors, hellos, socmeds } from "../mocks";
@@ -27,11 +26,8 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <Layout>
-      <motion.div
-        {...motionAttrs}
-        className="flex flex-col lg:gap-4 justify-center min-h-screen font-quicksand"
-      >
+    <section>
+      <div className="flex flex-col lg:gap-4 justify-center min-h-screen font-quicksand">
         <h1
           style={{ color: colors[colorIndex] }}
           className="text-5xl xs:(text-6xl) md:(text-7xl) lg:(text-8xl) xl:(text-9xl) font-black transition-colors duration-1000"
@@ -66,7 +62,7 @@ const Home: NextPage = () => {
             </a>
           ))}
         </div>
-      </motion.div>
+      </div>
       {quote && (
         <div className="flex flex-col justify-center min-h-screen">
           <motion.h3 {...motionAttrs}>Random Quote:</motion.h3>
@@ -84,7 +80,7 @@ const Home: NextPage = () => {
           </motion.p>
         </div>
       )}
-    </Layout>
+    </section>
   );
 };
 
