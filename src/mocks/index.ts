@@ -1,3 +1,6 @@
+import colors from "./colors.json";
+import hellos from "./hellos.json";
 import navs from "./navs";
+import socmeds from "./socmeds";
 
-export { navs };
+export { colors, hellos, navs, socmeds };

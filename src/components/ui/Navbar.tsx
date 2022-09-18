@@ -6,7 +6,7 @@ import { navs } from "../../mocks";
 const Navbar: FC = () => {
   const router = useRouter();
   return (
-    <nav className="sticky bottom-0 flex-shrink-0 flex flex-row lg:(static flex-col) items-center justify-center gap-4 p-4">
+    <nav className="sticky top-auto bottom-0 overflow-hidden w-full bg-black flex-shrink-0 flex flex-row lg:(top-0 right-0 w-auto h-screen flex-col) items-center justify-center gap-4 p-4">
       {navs.map((nav, index) => {
         const isActive = router.pathname === nav.path;
         return (
@@ -28,7 +28,7 @@ const Navbar: FC = () => {
                   {nav.name}
                 </span>
               </div>
-              <span className="absolute left-0 top-0 md:(top-full) h-2px w-0 group-hover:(w-full) group-focus:(top-0 h-full rounded) transition-all duration-300 ease bg-white" />
+              <span className="absolute left-0 top-0 lg:(top-full) h-2px w-0 group-hover:(w-full) group-focus:(top-0 h-full rounded) transition-all duration-300 ease bg-white" />
             </a>
           </Link>
         );
