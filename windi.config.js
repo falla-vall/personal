@@ -12,6 +12,10 @@ module.exports = defineConfig({
         quicksand: ["Quicksand", "sans-serif"],
         fira: ["Fira Code", "monospace"],
       },
+      screen: {
+        xs: "480px",
+        "3xl": "1920px",
+      },
     },
   },
 });

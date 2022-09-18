@@ -6,7 +6,9 @@ import { SessionProvider } from "next-auth/react";
 import type { AppType } from "next/dist/shared/lib/utils";
 import superjson from "superjson";
 import type { AppRouter } from "../server/router";
+import { motion, AnimatePresence } from "framer-motion";
 import { Toaster } from "react-hot-toast";
+import Layout from "../components/Layout";
 import "windi.css";
 import "../styles/globals.css";
 
@@ -16,7 +18,22 @@ const MyApp: AppType = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <Layout>
+        <AnimatePresence
+          exitBeforeEnter
+          onExitComplete={() => window.scrollTo(0, 0)}
+        >
+          <motion.div
+            key={Component.name}
+            initial={{ opacity: 0, x: -200 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -200 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Component {...pageProps} />
+          </motion.div>
+        </AnimatePresence>
+      </Layout>
       <Toaster />
     </SessionProvider>
   );

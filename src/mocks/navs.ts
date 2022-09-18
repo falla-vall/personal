@@ -15,7 +15,6 @@ const data = [
     name: "About",
     path: "/about",
     icon: HiOutlineUser,
-    isSoon: true,
   },
   {
     name: "Projects",
