@@ -6,6 +6,7 @@ import { SessionProvider } from "next-auth/react";
 import type { AppType } from "next/dist/shared/lib/utils";
 import superjson from "superjson";
 import type { AppRouter } from "../server/router";
+import { Toaster } from "react-hot-toast";
 import "windi.css";
 import "../styles/globals.css";
 
@@ -16,6 +17,7 @@ const MyApp: AppType = ({
   return (
     <SessionProvider session={session}>
       <Component {...pageProps} />
+      <Toaster />
     </SessionProvider>
   );
 };
