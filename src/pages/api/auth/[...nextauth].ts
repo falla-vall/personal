@@ -23,7 +23,28 @@ export const authOptions: NextAuthOptions = {
       clientId: env.DISCORD_CLIENT_ID,
       clientSecret: env.DISCORD_CLIENT_SECRET,
     }),
-    // ...add more providers here
+    {
+      id: "wakatime",
+      name: "Wakatime",
+      type: "oauth",
+      version: "2.0",
+      authorization: {
+        url: "https://wakatime.com/oauth/authorize",
+        params: { response_type: "code", scope: "email" },
+      },
+      token: "https://wakatime.com/oauth/token",
+      userinfo: "https://wakatime.com/api/v1/users/current",
+      clientId: env.WAKATIME_CLIENT_ID,
+      clientSecret: env.WAKATIME_CLIENT_SECRET,
+      profile(profile) {
+        console.log(profile);
+        return {
+          id: profile.data.id,
+          name: profile.data.username,
+          email: profile.data.email,
+        };
+      },
+    },
   ],
 };
 
