@@ -27,6 +27,7 @@ export const wakatimeRouter = createRouter().query("stats", {
         config
       )
       .then((res) => {
+        return { test: res.data };
         const langs = res.data.data.languages.slice(0, 10);
         const best_day = {
           date: res.data.data.best_day.date,

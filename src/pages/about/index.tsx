@@ -8,14 +8,14 @@ import computerAnimation from "../../../public/lottie/computer.json";
 import loadingAnimation from "../../../public/lottie/loading.json";
 
 const About: NextPage = () => {
-  const { data: stats, isLoading } = trpc.useQuery(["wakatime.stats"]);
-  const statsData = {
-    coding_all_time: stats?.coding_all_time,
-    coding_daily_average: stats?.coding_daily_average,
-    best_day: stats?.best_day,
-    editors: stats?.editors,
-    operating_systems: stats?.operating_systems,
-  };
+  // const { data: stats, isLoading } = trpc.useQuery(["wakatime.stats"]);
+  // const statsData = {
+  //   coding_all_time: stats?.coding_all_time,
+  //   coding_daily_average: stats?.coding_daily_average,
+  //   best_day: stats?.best_day,
+  //   editors: stats?.editors,
+  //   operating_systems: stats?.operating_systems,
+  // };
   return (
     <section>
       <div className="flex flex-col lg:gap-4 justify-center min-h-screen">
@@ -41,7 +41,7 @@ const About: NextPage = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col lg:gap-4 justify-center min-h-screen">
+      {/* <div className="flex flex-col lg:gap-4 justify-center min-h-screen">
         <h3 className="text-2xl sm:(text-3xl) md:(text-4xl) text-yellow-300 underline underline-offset-12 py-6 xl:(py-16)">
           My Coding Stats
         </h3>
@@ -74,7 +74,7 @@ const About: NextPage = () => {
             </>
           )}
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };
