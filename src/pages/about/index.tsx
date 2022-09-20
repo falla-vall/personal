@@ -8,7 +8,8 @@ import computerAnimation from "../../../public/lottie/computer.json";
 import loadingAnimation from "../../../public/lottie/loading.json";
 
 const About: NextPage = () => {
-  // const { data: stats, isLoading } = trpc.useQuery(["wakatime.stats"]);
+  const { data: stats, isLoading } = trpc.useQuery(["wakatime.stats"]);
+  console.log("stats", stats);
   // const statsData = {
   //   coding_all_time: stats?.coding_all_time,
   //   coding_daily_average: stats?.coding_daily_average,
