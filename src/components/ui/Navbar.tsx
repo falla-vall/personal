@@ -46,7 +46,7 @@ const Navbar: FC = () => {
             <span className="absolute left-0 top-0 lg:(top-full) h-2px w-0 group-hover:(w-full) group-focus:(top-0 h-full rounded) transition-all duration-300 ease bg-white" />
           </button>
         ) : (
-          <Link key={index} href={nav.path}>
+          <Link key={index} href={nav.path} scroll={false}>
             <a
               className={`relative group md:w-32 p-2 rounded transition-all duration-300 ease ${
                 isActive
