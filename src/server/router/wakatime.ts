@@ -27,7 +27,6 @@ export const wakatimeRouter = createRouter().query("stats", {
         config
       )
       .then((res) => {
-        return { test: res.data };
         const langs = res.data.data.languages.slice(0, 10);
         const best_day = {
           date: res.data.data.best_day.date,
@@ -45,7 +44,7 @@ export const wakatimeRouter = createRouter().query("stats", {
           res.data.data.human_readable_daily_average_including_other_language;
         const langGraphs = langs.map((lang: Language) => {
           return {
-            id: lang.name.toLowerCase().replaceAll(" ", "-"),
+            id: lang.name,
             label: lang.name,
             value: lang.total_seconds,
             color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
