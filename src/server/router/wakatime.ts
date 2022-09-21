@@ -44,7 +44,7 @@ export const wakatimeRouter = createRouter().query("stats", {
           res.data.data.human_readable_daily_average_including_other_language;
         const langGraphs = langs.map((lang: Language) => {
           return {
-            id: lang.name.toLowerCase().replaceAll(" ", "-"),
+            id: lang.name,
             label: lang.name,
             value: lang.total_seconds,
             color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
