@@ -8,6 +8,12 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "prettier": "@flla/prettier-config",
+  "lint-staged": {
+    "**/*.{js,ts,jsx,tsx,html,json}": [
+      "pnpm prettier --write"
+    ]
+  },
   "dependencies": {
     "@types/node": "20.3.1",
     "@types/react": "18.2.12",
@@ -21,5 +27,13 @@
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.2",
     "typescript": "5.1.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.5",
+    "@commitlint/config-conventional": "^17.6.5",
+    "@flla/prettier-config": "^1.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "prettier": "^2.8.8"
   }
 }
