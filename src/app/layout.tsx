@@ -1,11 +1,8 @@
 import "./globals.css";
 import "@heathmont/moon-themes-tw/lib/moon.css";
-import { Inter } from "next/font/google";
 import { cookies } from "next/headers";
 
 import type { Metadata } from "next";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,8 +16,8 @@ export default function RootLayout({
 }) {
   const theme = cookies().get("theme")?.value || "light";
   return (
-    <html lang="en" dir="ltr" className={`theme-moon-${theme}`}>
-      <body className={inter.className}>{children}</body>
+    <html lang="en" dir="ltr" className={`theme-moon-${theme} font-averta`}>
+      <body>{children}</body>
     </html>
   );
 }

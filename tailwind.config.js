@@ -8,6 +8,19 @@ module.exports = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        "vertical-infinite": {
+          "0%, 100%": {
+            "background-position": "0 0",
+          },
+          "50%": {
+            "background-position": "100% 0",
+          },
+        },
+      },
+      animation: {
+        "vertical-infinite": "vertical-infinite 10s infinite",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
