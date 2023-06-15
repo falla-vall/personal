@@ -17,9 +17,27 @@ module.exports = {
             "background-position": "100% 0",
           },
         },
+        "spin-translate": {
+          "0%, 100%": {
+            transform: "translate(0%, -150%) rotate(0deg)",
+          },
+          "25%": {
+            transform: "translate(150%, 0%) rotate(90deg)",
+          },
+          "50%": {
+            transform: "translate(0%, 150%) rotate(180deg)",
+          },
+          "75%": {
+            transform: "translate(-150%, 0%) rotate(270deg)",
+          },
+          "100%": {
+            transform: "translate(0%, -150%) rotate(360deg)",
+          },
+        },
       },
       animation: {
         "vertical-infinite": "vertical-infinite 10s infinite",
+        "spin-translate": "spin-translate 60s linear infinite",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
