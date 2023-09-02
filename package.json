@@ -42,6 +42,7 @@
     "@commitlint/config-conventional": "^17.7.0",
     "@flla/prettier-config": "^1.0.0",
     "cli": "link:@commitlint\\cli",
+    "commitlint": "^17.7.1",
     "husky": "^8.0.0",
     "lint-staged": "^13.2.3",
     "prettier": "^3.0.1"
